@@ -1,64 +1,60 @@
 package com.example.rsq;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PumpEvaluationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 public class PumpEvaluationFragment extends Fragment {
+    private QuizViewModel quizViewModel;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PumpEvaluationFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PumpEvaluationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PumpEvaluationFragment newInstance(String param1, String param2) {
-        PumpEvaluationFragment fragment = new PumpEvaluationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_pump_evaluation, container, false);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pump_evaluation, container, false);
+        quizViewModel = new ViewModelProvider(requireActivity()).get(QuizViewModel.class);
+
+        RadioGroup radioGroup1 = root.findViewById(R.id.radioGroup1);
+        RadioGroup radioGroup2 = root.findViewById(R.id.radioGroup2);
+        RadioGroup radioGroup3 = root.findViewById(R.id.radioGroup3);
+
+        Button validateButton = root.findViewById(R.id.button_submit);
+
+        validateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int selectedId1 = radioGroup1.getCheckedRadioButtonId();
+                int selectedId2 = radioGroup2.getCheckedRadioButtonId();
+                int selectedId3 = radioGroup3.getCheckedRadioButtonId();
+
+                RadioButton radioButton1 = root.findViewById(selectedId1);
+                RadioButton radioButton2 = root.findViewById(selectedId2);
+                RadioButton radioButton3 = root.findViewById(selectedId3);
+
+                if (radioButton1 != null) {
+                    quizViewModel.setAnswer1(radioButton1.getText().toString());
+                }
+
+                if (radioButton2 != null) {
+                    quizViewModel.setAnswer2(radioButton2.getText().toString());
+                }
+
+                if (radioButton3 != null) {
+                    quizViewModel.setAnswer3(radioButton3.getText().toString());
+                }
+            }
+        });
+
+        return root;
     }
 }
