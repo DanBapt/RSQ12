@@ -147,6 +147,7 @@
             android:text="Non acquis"/>
 
     </RadioGroup>
+
     <TextView
         android:id="@+id/question_text_5"
         android:layout_width="wrap_content"
@@ -183,12 +184,22 @@
 
     </RadioGroup>
 
-    <Button
-        android:id="@+id/button_submit"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Valider l'évaluation"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="2dp" />
+        android:gravity="end"
+        android:layout_marginTop="70dp">
+
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="16dp"
+            android:text="Valider l'évaluation" />
+    </LinearLayout>
 
 </LinearLayout>
+
+

@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="tabTextColor">#000000</color> <!-- Couleur du texte des onglets -->
+    <color name="tabSelectedTextColor">#03DAC5</color> <!-- Couleur du texte de l'onglet sélectionné -->
+    <color name="tabIndicatorColor">#6200EE</color> <!-- Couleur de l'indicateur d'onglet -->
+
 </resources>

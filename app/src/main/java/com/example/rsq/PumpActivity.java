@@ -1,14 +1,15 @@
 package com.example.rsq;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.viewpager2.widget.ViewPager2;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import android.util.Log;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class PumpActivity extends AppCompatActivity {
 
@@ -44,10 +45,13 @@ public class PumpActivity extends AppCompatActivity {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
+            Log.d("PagerAdapter", "Creating fragment for position: " + position); // Added
             switch (position) {
                 case 0:
+                    Log.d("PagerAdapter", "Creating PumpEvaluationFragment"); // Added
                     return new PumpEvaluationFragment();
                 case 1:
+                    Log.d("PagerAdapter", "Creating PumpResultsFragment"); // Added
                     return new PumpResultsFragment();
                 default:
                     return null;
