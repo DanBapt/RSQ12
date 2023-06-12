@@ -1,8 +1,10 @@
-package com.example.rsq;
+package com.example.rsq.Defibrillator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.rsq.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import androidx.annotation.NonNull;
@@ -29,9 +31,12 @@ public class DefibrillatorActivity extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
                     case 0:
-                        tab.setText("Évaluation");
+                        tab.setText("Paramètres");
                         break;
                     case 1:
+                        tab.setText("Évaluation");
+                        break;
+                    case 2:
                         tab.setText("Résultats");
                         break;
                 }
@@ -51,8 +56,10 @@ public class DefibrillatorActivity extends AppCompatActivity {
         public Fragment createFragment(int position) {
             switch (position) {
                 case 0:
-                    return new DefibrillatorEvaluationFragment();
+                    return new DefibrillatorParametresFragment();
                 case 1:
+                    return new DefibrillatorEvaluationFragment();
+                case 2:
                     return new DefibrillatorResultsFragment();
                 default:
                     return null;
@@ -61,7 +68,7 @@ public class DefibrillatorActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 2;  // Nous avons deux onglets
+            return 3;  // Nous avons trois onglets maintenant
         }
     }
 }

@@ -7,6 +7,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.rsq.Defibrillator.DefibrillatorActivity;
+import com.example.rsq.Pump.PumpActivity;
+
 public class HomeActivity extends AppCompatActivity {
     private Button buttonDefibrillator;
     private Button buttonPump;

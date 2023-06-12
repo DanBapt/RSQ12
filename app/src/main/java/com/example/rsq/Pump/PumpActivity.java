@@ -1,4 +1,4 @@
-package com.example.rsq;
+package com.example.rsq.Pump;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.rsq.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -27,10 +29,16 @@ public class PumpActivity extends AppCompatActivity {
         // Use TabLayoutMediator to link TabLayout and ViewPager2
         new TabLayoutMediator(tabLayout, viewPager,
                 (tab, position) -> {
-                    if (position == 0) {
-                        tab.setText("Pompe - Évaluation");
-                    } else if (position == 1) {
-                        tab.setText("Pompe - Résultats");
+                    switch (position) {
+                        case 0:
+                            tab.setText("Paramètres");
+                            break;
+                        case 1:
+                            tab.setText("Évaluation");
+                            break;
+                        case 2:
+                            tab.setText("Résultats");
+                            break;
                     }
                 }).attach();
     }
@@ -48,9 +56,12 @@ public class PumpActivity extends AppCompatActivity {
             Log.d("PagerAdapter", "Creating fragment for position: " + position); // Added
             switch (position) {
                 case 0:
+                    // Remplacer avec votre nouveau fragment
+                    return new PumpParametresFragment();
+                case 1:
                     Log.d("PagerAdapter", "Creating PumpEvaluationFragment"); // Added
                     return new PumpEvaluationFragment();
-                case 1:
+                case 2:
                     Log.d("PagerAdapter", "Creating PumpResultsFragment"); // Added
                     return new PumpResultsFragment();
                 default:
@@ -60,7 +71,7 @@ public class PumpActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return 2;  // We have two tabs
+            return 3;  // Nous avons maintenant trois onglets
         }
     }
 }

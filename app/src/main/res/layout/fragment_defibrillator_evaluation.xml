@@ -45,9 +45,9 @@
         android:id="@+id/question_text_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Insufflation efficace :"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"/>
+        android:text="Insufflation efficace :" />
 
     <RadioGroup
         android:id="@+id/radioGroup2"

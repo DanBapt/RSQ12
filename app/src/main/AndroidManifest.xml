@@ -12,13 +12,10 @@
         android:theme="@style/Theme.RSQ"
         tools:targetApi="31">
         <activity
-            android:name=".PumpActivity"
+            android:name=".Pump.PumpActivity"
             android:exported="false" />
         <activity
-            android:name=".DefibrillatorActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".Defibrillator.DefibrillatorActivity"
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
