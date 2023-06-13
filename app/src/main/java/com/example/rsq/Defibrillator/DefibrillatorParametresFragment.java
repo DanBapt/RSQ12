@@ -20,7 +20,6 @@ public class DefibrillatorParametresFragment extends Fragment {
     private LinearLayout participantLayout;
     private EditText numParticipantsEditText;
     private Button submitButton;
-    private Button submitNamesButton;
 
     @Nullable
     @Override
@@ -31,9 +30,6 @@ public class DefibrillatorParametresFragment extends Fragment {
         participantLayout = root.findViewById(R.id.participant_layout);
         numParticipantsEditText = root.findViewById(R.id.num_participants);
         submitButton = root.findViewById(R.id.submit_button_participant);
-        submitNamesButton = new Button(getContext());
-        submitNamesButton.setText("Valider les noms");
-        submitNamesButton.setVisibility(View.GONE); // le bouton sera invisible par défaut
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,16 +42,6 @@ public class DefibrillatorParametresFragment extends Fragment {
                     numParticipants = 0;
                 }
                 updateParticipantFields(numParticipants);
-                submitNamesButton.setVisibility(View.VISIBLE); // le bouton devient visible après avoir cliqué sur "Submit"
-            }
-        });
-
-        participantLayout.addView(submitNamesButton);
-
-        submitNamesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Logique pour traiter les noms des participants et passer à l'onglet suivant
             }
         });
 
@@ -69,6 +55,5 @@ public class DefibrillatorParametresFragment extends Fragment {
             participantNameEditText.setHint("Participant " + (i + 1));
             participantLayout.addView(participantNameEditText);
         }
-        participantLayout.addView(submitNamesButton);  // Assurez-vous que le bouton "Submit Names" est toujours en bas
     }
 }
