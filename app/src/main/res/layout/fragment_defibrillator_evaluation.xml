@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <!-- Les questionnaires des participants seront ajoutés ici -->
+        <!-- Les questionnaires des participants seront ajoutés ici dynamiquement -->
 
         <Button
             android:id="@+id/button_submit"
@@ -23,7 +23,5 @@
             android:text="Valider l'évaluation" />
 
     </LinearLayout>
-
-
 
 </ScrollView>

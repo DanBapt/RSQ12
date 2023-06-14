@@ -1,7 +1,6 @@
 package com.example.rsq.Defibrillator;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,26 +22,26 @@ import java.util.List;
 
 public class DefibrillatorEvaluationFragment extends Fragment {
     private QuizViewModel quizViewModel;
-    private LinearLayout questionnaireLayout; // Layout pour ajouter les questionnaires des participants
+    private LinearLayout questionnaireLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_defibrillator_evaluation, container, false);
-        questionnaireLayout = root.findViewById(R.id.questionnaire_layout); // Assurez-vous d'ajouter ce LinearLayout dans fragment_defibrillator_evaluation.xml
+        questionnaireLayout = root.findViewById(R.id.questionnaire_layout);
         quizViewModel = new ViewModelProvider(requireActivity()).get(QuizViewModel.class);
 
         List<String> participantNames = ((DefibrillatorActivity) getActivity()).getParticipantNames();
 
-        // Générer les questionnaires pour chaque participant
+        // Generate questionnaires for each participant
         for (String participantName : participantNames) {
             View participantQuestionnaire = inflater.inflate(R.layout.defibrillator_participant_questionnaire, questionnaireLayout, false);
 
             TextView participantNameTextView = participantQuestionnaire.findViewById(R.id.participant_name);
             participantNameTextView.setText(participantName);
 
-            questionnaireLayout.addView(participantQuestionnaire);
+            questionnaireLayout.addView(participantQuestionnaire, questionnaireLayout.getChildCount() - 1); // Added "- 1" to add questionnaire before button
         }
 
         Button validateButton = root.findViewById(R.id.button_submit);
@@ -50,12 +49,8 @@ public class DefibrillatorEvaluationFragment extends Fragment {
         validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Vous devez maintenant récupérer les réponses de chaque questionnaire de participant
-                // Cela nécessite probablement des modifications dans votre modèle de données, car vous stockez actuellement les réponses dans QuizViewModel.
-                // Une approche possible serait de parcourir chaque vue de participantQuestionnaire dans questionnaireLayout et de récupérer les réponses de chaque questionnaire.
-
-                // Par exemple :
-                for (int i = 0; i < questionnaireLayout.getChildCount(); i++) {
+                // This part collects the answers from each participant's questionnaire.
+                for (int i = 0; i < questionnaireLayout.getChildCount() - 1; i++) { // Modified condition to "- 1" to ignore the button
                     View participantQuestionnaire = questionnaireLayout.getChildAt(i);
 
                     RadioGroup radioGroup1 = participantQuestionnaire.findViewById(R.id.radioGroup1);
@@ -76,8 +71,7 @@ public class DefibrillatorEvaluationFragment extends Fragment {
                     RadioButton radioButton4 = radioGroup4.findViewById(selectedId4);
                     RadioButton radioButton5 = radioGroup5.findViewById(selectedId5);
 
-                    // À ce stade, vous pouvez stocker les réponses de chaque participant séparément.
-                    // Notez que vous devrez probablement modifier votre QuizViewModel pour gérer un ensemble de réponses pour chaque participant.
+                    // At this point, you can store the responses from each participant separately.
                 }
             }
         });
