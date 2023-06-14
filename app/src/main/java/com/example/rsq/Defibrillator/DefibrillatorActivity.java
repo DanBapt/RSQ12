@@ -12,7 +12,20 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DefibrillatorActivity extends AppCompatActivity {
+
+    private List<String> participantNames = new ArrayList<>();
+    public void updateParticipantNames(List<String> names) {
+        this.participantNames = names;
+    }
+
+    public List<String> getParticipantNames() {
+        return this.participantNames;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
