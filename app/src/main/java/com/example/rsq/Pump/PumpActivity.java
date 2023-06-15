@@ -8,12 +8,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.rsq.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public class PumpActivity extends AppCompatActivity {
+
+    private List<String> participantNames = new ArrayList<>();
+    public void updateParticipantNames(List<String> names) {
+        this.participantNames = names;
+    }
+    public void navigateToResultsFragment() {
+        // Code to switch to the ResultsFragment
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +83,8 @@ public class PumpActivity extends AppCompatActivity {
         public int getItemCount() {
             return 3;  // Nous avons maintenant trois onglets
         }
+    }
+    public List<String> getParticipantNames() {
+        return participantNames;
     }
 }

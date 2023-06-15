@@ -1,17 +1,40 @@
 package com.example.rsq;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class QuizViewModel extends ViewModel {
+
     // Utilisez LiveData pour chaque question
     private MutableLiveData<String> answer1 = new MutableLiveData<>();
     private MutableLiveData<String> answer2 = new MutableLiveData<>();
     private MutableLiveData<String> answer3 = new MutableLiveData<>();
-    private MutableLiveData<String> answer4 = new MutableLiveData<>();
-    private MutableLiveData<String> answer5 = new MutableLiveData<>();
 
-    // Ajoutez des méthodes pour définir les réponses
+    // Nouvelle classe pour représenter les résultats d'un participant
+    public static class ParticipantResults {
+        public String participantName;
+        public String answer1;
+        public String answer2;
+        public String answer3;
+
+        public ParticipantResults(String participantName, String answer1, String answer2, String answer3) {
+            this.participantName = participantName;
+            this.answer1 = answer1;
+            this.answer2 = answer2;
+            this.answer3 = answer3;
+        }
+    }
+
+    // Nouvelle propriété pour stocker les résultats des participants
+    private MutableLiveData<List<ParticipantResults>> participantResults = new MutableLiveData<>(new ArrayList<>());
+
+    // Propriété pour stocker les noms des participants
+    private MutableLiveData<List<String>> participantNames = new MutableLiveData<>();
+
     public void setAnswer1(String answer) {
         answer1.setValue(answer);
     }
@@ -24,15 +47,6 @@ public class QuizViewModel extends ViewModel {
         answer3.setValue(answer);
     }
 
-    public void setAnswer4(String answer) {
-        answer4.setValue(answer);
-    }
-
-    public void setAnswer5(String answer) {
-        answer5.setValue(answer);
-    }
-
-    // Ajoutez des méthodes pour obtenir les réponses
     public LiveData<String> getAnswer1() {
         return answer1;
     }
@@ -45,11 +59,21 @@ public class QuizViewModel extends ViewModel {
         return answer3;
     }
 
-    public LiveData<String> getAnswer4() {
-        return answer4;
+    // Nouvelles méthodes pour obtenir et définir les résultats des participants
+    public LiveData<List<ParticipantResults>> getParticipantResults() {
+        return participantResults;
     }
 
-    public LiveData<String> getAnswer5() {
-        return answer5;
+    public void setParticipantResults(List<ParticipantResults> results) {
+        this.participantResults.setValue(results);
+    }
+
+    // Méthodes pour définir et obtenir les noms des participants
+    public void setParticipantNames(List<String> names) {
+        this.participantNames.setValue(names);
+    }
+
+    public LiveData<List<String>> getParticipantNames() {
+        return this.participantNames;
     }
 }

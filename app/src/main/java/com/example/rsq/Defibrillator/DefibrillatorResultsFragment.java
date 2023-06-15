@@ -60,21 +60,21 @@ public class DefibrillatorResultsFragment extends Fragment {
             }
         });
 
-        quizViewModel.getAnswer4().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String answer) {
+       // quizViewModel.getAnswer4().observe(getViewLifecycleOwner(), new Observer<String>() {
+        //    @Override
+       //     public void onChanged(String answer) {
                 // Mettez à jour votre interface utilisateur avec la réponse
-                answer4TextView.setText("Bilan en cours de RCP : " + answer);
-            }
-        });
+        //        answer4TextView.setText("Bilan en cours de RCP : " + answer);
+        //    }
+     //   });
 
-        quizViewModel.getAnswer5().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String answer) {
+      //  quizViewModel.getAnswer5().observe(getViewLifecycleOwner(), new Observer<String>() {
+       //     @Override
+        //    public void onChanged(String answer) {
                 // Mettez à jour votre interface utilisateur avec la réponse
-                answer5TextView.setText("Bilan effectué en conformité : " + answer);
-            }
-        });
+        //        answer5TextView.setText("Bilan effectué en conformité : " + answer);
+      //      }
+     //   });
 
         return root;
     }

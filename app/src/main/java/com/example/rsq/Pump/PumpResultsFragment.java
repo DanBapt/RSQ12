@@ -1,60 +1,57 @@
 package com.example.rsq.Pump;
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.rsq.QuizViewModel;
 import com.example.rsq.R;
 
+import java.util.List;
+
 public class PumpResultsFragment extends Fragment {
+
     private QuizViewModel quizViewModel;
 
-    public PumpResultsFragment() {
-        // Required empty public constructor
-    }
-
-    public static PumpResultsFragment newInstance() {
-        return new PumpResultsFragment();
-    }
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_pump_results, container, false);
+
+        final LinearLayout resultLayout = root.findViewById(R.id.result_layout); // supposons que vous avez un LinearLayout pour afficher les résultats
 
         quizViewModel = new ViewModelProvider(requireActivity()).get(QuizViewModel.class);
 
-        // Supposez que vous avez un TextView pour chaque réponse
-        TextView answer1TextView = root.findViewById(R.id.answer1);
-        TextView answer2TextView = root.findViewById(R.id.answer2);
-        TextView answer3TextView = root.findViewById(R.id.answer3);
-
-        quizViewModel.getAnswer1().observe(getViewLifecycleOwner(), new Observer<String>() {
+        quizViewModel.getParticipantResults().observe(getViewLifecycleOwner(), new Observer<List<QuizViewModel.ParticipantResults>>() {
             @Override
-            public void onChanged(String answer) {
-                // Mettez à jour votre interface utilisateur avec la réponse
-                answer1TextView.setText("Gestes de premier secours immédiats et efficaces : " + answer);
-            }
-        });
+            public void onChanged(List<QuizViewModel.ParticipantResults> participantResults) {
+                resultLayout.removeAllViews(); // retirez d'abord toutes les vues existantes
 
-        quizViewModel.getAnswer2().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String answer) {
-                // Mettez à jour votre interface utilisateur avec la réponse
-                answer2TextView.setText("Pose d'un garrot efficace :" + answer);
-            }
-        });
+                for (QuizViewModel.ParticipantResults results : participantResults) {
+                    View participantResultView = inflater.inflate(R.layout.pump_participant_results, resultLayout, false);
 
-        quizViewModel.getAnswer3().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(String answer) {
-                // Mettez à jour votre interface utilisateur avec la réponse
-                answer3TextView.setText("Bilan effectué en conformité :" + answer);
+                    TextView participantNameTextView = participantResultView.findViewById(R.id.participant_name);
+                    TextView answer1TextView = participantResultView.findViewById(R.id.answer1);
+                    TextView answer2TextView = participantResultView.findViewById(R.id.answer2);
+                    TextView answer3TextView = participantResultView.findViewById(R.id.answer3);
+
+                    participantNameTextView.setText(results.participantName);
+                    answer1TextView.setText("Gestes de premier secours immédiats et efficaces : " + results.answer1);
+                    answer2TextView.setText("Pose d'un garrot efficace : " + results.answer2);
+                    answer3TextView.setText("Bilan effectué en conformité : " + results.answer3);
+
+                    resultLayout.addView(participantResultView); // ajoutez la vue au layout
+                }
             }
         });
 
